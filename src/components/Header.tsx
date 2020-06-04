@@ -51,7 +51,7 @@ interface Navigation {
 
 const useStyles = makeStyles(() => ({
     appBar: {
-        zIndex: 1000,
+        zIndex: 2020,
     },
     navigationButtonGroup: {
         borderRadius: "25px",
@@ -66,7 +66,6 @@ const useStyles = makeStyles(() => ({
         flexGrow: 1,
     },
     drawer: {
-        zIndex: 999,
         borderBottomLeftRadius: "25px",
         borderBottomRightRadius: "25px"
     },
@@ -86,10 +85,11 @@ const useStyles = makeStyles(() => ({
         minWidth: "42px",
     },
     popOverListItemIcon: {
-        minWidth: "40px"
+        minWidth: "40px",
     },
     popOverListItemText: {
-        textTransform: "uppercase"
+        textTransform: "uppercase",
+        width: "100px"
     },
 }));
 
