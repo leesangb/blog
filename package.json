@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "build": "gatsby build",
-    "predeploy": "npm run build && rm public/*.js.map",
+    "predeploy": "npm run clean && npm run build && rm public/*.js.map",
     "develop": "gatsby develop",
     "start": "npm run develop",
     "serve": "gatsby serve",

@@ -1,6 +1,6 @@
 import i18next from "i18next";
 import { initReactI18next } from "react-i18next"
-import {loadLocale} from "./localStorage";
+import {loadLocale} from "../tools/localStorage";
 
 
 i18next.use(initReactI18next)
@@ -10,19 +10,19 @@ i18next.use(initReactI18next)
         debug: false,
         resources: {
             "kr": {
-                translation: require("../locales/kr/translation.json"),
-                me: require("../locales/kr/me.json"),
-                posts: require("../locales/kr/posts.json")
+                translation: require("./kr/translation.json"),
+                me: require("./kr/me.json"),
+                posts: require("./kr/posts.json")
             },
             "fr": {
-                translation: require("../locales/fr/translation.json"),
-                me: require("../locales/fr/me.json"),
-                posts: require("../locales/fr/posts.json")
+                translation: require("./fr/translation.json"),
+                me: require("./fr/me.json"),
+                posts: require("./fr/posts.json")
             },
             "en": {
-                translation: require("../locales/en/translation.json"),
-                me: require("../locales/en/me.json"),
-                posts: require("../locales/en/posts.json")
+                translation: require("./en/translation.json"),
+                me: require("./en/me.json"),
+                posts: require("./en/posts.json")
             },
         },
         ns: ["translation", "me", "posts"],

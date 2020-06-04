@@ -1,11 +1,11 @@
 import * as React from 'react';
+import i18next from "../../src/locales/i18next";
 import { Helmet } from 'react-helmet';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import {createMuiTheme, makeStyles, MuiThemeProvider} from '@material-ui/core/styles';
 import {useDarkMode} from "../../src/theme";
 import {enUS, frFR, koKR} from "@material-ui/core/locale";
 import Header from "../../src/components/Header";
-import i18next from "../../src/tools/i18next";
 import {I18nextProvider, useTranslation} from "react-i18next";
 import { navigate } from "gatsby"
 // @ts-ignore
