@@ -1,0 +1,32 @@
+{
+    "experiences": "Experiences",
+    "dateFormat": "MMMM yyyy",
+    "present": "Present",
+    "socgen": {
+        "title": "Software Engineer Intern",
+        "description": "Migrate API and Web Client App to new technology",
+        "fullDescription": "### API \n- Migrate .NET Framework 4.7 OData API to .NET Core 3.1\n- Add API versioning\n- Add unit tests\n- Add Swagger\n### Web Client\n- Migrate AngularJS website to React (16.13) + Typescript (3.8.3)\n - Improve UI/UX"
+    },
+    "epita": {
+        "title": "Teaching Assistant",
+        "description": "Supervise projects of 3rd year students",
+        "fullDescription": "- Teach C language and Unix environment\n- Code reviews\n- Supervise reimplementation projects such as malloc, make, find and POSIX shell"
+    },
+    "crafty": {
+        "title": "Software Engineer Intern",
+        "description": "Add Crafty's core features",
+        "fullDescription": "- Improve searching and highlighting\n- Improve the matching percentage algorithm\n- Add possibility to export a profile to Word document\n- Practice SOLID principles and TDD (Test-Driven Development)"
+    },
+    "samsung": {
+        "name": "Samsung Electronics France",
+        "title": "Mobile Quality Assurance Intern",
+        "description": "Improve testing tools and tracking tools for smartphones and tablets",
+        "fullDescription": ""
+    },
+    "about me": "About me",
+    "profile": {
+        "firstname": "Sangbin",
+        "lastname": "Lee",
+        "description": "I enjoy developing software that is intuitive, easy to use and well designed"
+    }
+}

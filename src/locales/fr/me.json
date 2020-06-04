@@ -1,0 +1,32 @@
+{
+    "experiences": "Expériences",
+    "dateFormat": "MMMM yyyy",
+    "present": "Aujourd'hui",
+    "socgen": {
+        "title": "Stagiaire Ingénieur Informatique",
+        "description": "Migration d'une API et d'un client web",
+        "fullDescription": "### API \n- Migration de l'API OData .NET Framework 4.7 en .NET Core 3.1\n- Ajout du versioning d'API\n- Ajout de tests unitaires\n- Ajout d'une documentation Swagger\n### Client web\n- Migration d'une partie du site de AngularJS vers React (16.13) + Typescript (3.8.3)\n - Amélioration de l'UI/UX"
+    },
+    "epita": {
+        "title": "Assistant",
+        "description": "Encadrement des étudiants de 3ème année",
+        "fullDescription": "- Enseignement du langage C et environnement Unix\n- Code reviews\n- Encadrement des projets de réimplémention de malloc, make, find et un shell POSIX"
+    },
+    "crafty": {
+        "title": "Stagiaire Ingénieur Informatique",
+        "description": "Ajout de fonctionnalités coeur sur la plateforme Crafty",
+        "fullDescription": "- Amélioration de la fonction de recherche et de mise en avant\n- Amélioration de l'algorithme calculant le pourcentage de \"matching\"\n- Export de profil en document Word\n- Application des principes SOLID et du TDD (Test-Driven Development)"
+    },
+    "samsung": {
+        "name": "Samsung Electronics France",
+        "title": "Stagiaire Mobile Quality Assurance",
+        "description": "Amélioration des outils de tests et de suivi pour les smartphones et tablettes",
+        "fullDescription": ""
+    },
+    "about me": "À propos de moi",
+    "profile": {
+        "firstname": "Sangbin",
+        "lastname": "Lee",
+        "description": "J'aime développer des programmes intuitifs, facile à utiliser avec un design travaillé"
+    }
+}
