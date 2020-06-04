@@ -20,6 +20,9 @@ const useStyles = makeStyles(() => ({
     },
     tagChip: {
         margin: "3px",
+    },
+    cardMedia: {
+        height: 250
     }
 }));
 
@@ -39,7 +42,7 @@ const PostCard = (props: PostCardProps) => {
 
     return <ElevationCard onClick={handleClickCard}>
             <CardActionArea>
-                <CardMedia style={{height: 250}} image={post.thumbnail}/>
+                <CardMedia className={classes.cardMedia} image={post.thumb}/>
                 <CardContent>
                     {
                         ready

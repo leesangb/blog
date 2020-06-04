@@ -1,4 +1,4 @@
-import {CardContent, Divider, Grow, List, Typography} from "@material-ui/core";
+import {CardContent, Divider, Grow, List, Theme, Typography} from "@material-ui/core";
 import {Skeleton} from "@material-ui/lab";
 import * as React from "react";
 import {useTranslation} from "react-i18next";
@@ -8,7 +8,7 @@ import ExperienceItem from "./ExperienceItem";
 import {makeStyles} from "@material-ui/core/styles";
 import {graphql, useStaticQuery} from "gatsby";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme: Theme) => ({
     title: {
         margin: "10px",
     },
@@ -17,7 +17,17 @@ const useStyles = makeStyles(() => ({
         width: "50px",
     },
     divider: {
-        marginRight:"25px",
+        [theme.breakpoints.up('sm')]: {
+            margin: "0px 25px 0px 25px"
+        },
+        [theme.breakpoints.down('xs')]: {
+            margin: "0px 25px 0px 25px"
+        }
+    },
+    cardContent: {
+        [theme.breakpoints.down('xs')]: {
+            padding: "14px"
+        }
     }
 }));
 
@@ -106,7 +116,7 @@ const ExperiencesCard = () => {
 
     return <Grow in={ready}>
         <ElevationCard>
-            <CardContent>
+            <CardContent className={classes.cardContent}>
                 {
                     ready
                         ? <Typography className={classes.title} variant={"h5"}>{t("experiences")}</Typography>

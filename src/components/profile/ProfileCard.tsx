@@ -75,6 +75,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     linkedInIcon: {
         color:"#0077B5",
+    },
+    cardContent: {
+        [theme.breakpoints.down('xs')]: {
+            padding: "14px"
+        }
     }
 }));
 
@@ -145,7 +150,7 @@ const ProfileCard = () => {
 
     return <Grow in={ready}>
         <ElevationCard>
-            <CardContent>
+            <CardContent className={classes.cardContent}>
                 {
                     ready
                         ? <Typography className={classes.aboutMe} variant={"h5"}>{t("about me")}</Typography>

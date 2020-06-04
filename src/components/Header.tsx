@@ -51,7 +51,7 @@ interface Navigation {
 
 const useStyles = makeStyles(() => ({
     appBar: {
-        zIndex: 2020,
+        zIndex: 1400,
     },
     navigationButtonGroup: {
         borderRadius: "25px",
@@ -218,6 +218,7 @@ const Header = (props: HeaderProps) => {
                 <Popover open={Boolean(anchorEl)}
                          onClose={closePopover}
                          anchorEl={anchorEl}
+                         style={{zIndex: 1500}}
                          anchorOrigin={{vertical: "bottom", horizontal: "right"}}>
                     <Card onMouseLeave={() => setExpand(false)}>
                         <CardContent>

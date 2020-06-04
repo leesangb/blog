@@ -1,5 +1,16 @@
 import {
-    Avatar, Chip, Collapse, IconButton, List, ListItem, ListItemAvatar, ListItemIcon, ListItemText, Tooltip, Typography
+    Avatar,
+    Chip,
+    Collapse,
+    IconButton,
+    List,
+    ListItem,
+    ListItemAvatar,
+    ListItemIcon,
+    ListItemText, Toolbar,
+    Tooltip,
+    Typography,
+    useMediaQuery, useTheme
 } from "@material-ui/core";
 import {Skeleton} from "@material-ui/lab";
 import {format, formatDistance} from "date-fns";
@@ -16,6 +27,7 @@ import ExpandMore from '@material-ui/icons/ExpandMore';
 import ReactMarkdown from "react-markdown";
 import WebsiteIcon from '@material-ui/icons/LanguageRounded';
 import {makeStyles} from "@material-ui/core/styles";
+import CompanyIcon from '@material-ui/icons/BusinessRounded';
 
 
 interface ExperienceItemProps {
@@ -50,6 +62,9 @@ const useStyles = makeStyles(() => ({
     },
     skeleton40: {
         height: "40px",
+    },
+    markdown: {
+        padding: 0
     }
 }));
 
@@ -57,6 +72,9 @@ const ExperienceItem = (props: ExperienceItemProps) => {
     const {t, i18n} = useTranslation("me");
     const {experience, ready} = props;
     const classes = useStyles();
+
+    const theme = useTheme();
+    const xsDown = useMediaQuery(theme.breakpoints.down('xs'));
 
     const [open, setOpen] = React.useState(false);
 
@@ -78,33 +96,57 @@ const ExperienceItem = (props: ExperienceItemProps) => {
 
     return <>
         <ListItem className={classes.listItemRoot} button onClick={handleClick}>
-            <ListItemAvatar>
-                {
-                    ready
-                        ? <Avatar variant={"rounded"} alt={experience.company} src={experience.logo}/>
-                        : <Skeleton variant={"circle"} className={classes.skeletonAvatar}/>
-                }
-
-            </ListItemAvatar>
+            {
+                xsDown
+                    ? <></>
+                    : <ListItemAvatar>
+                        {
+                            ready
+                                ? <Avatar variant={"rounded"} alt={experience.company} src={experience.logo}/>
+                                : <Skeleton variant={"circle"} className={classes.skeletonAvatar}/>
+                        }
+                    </ListItemAvatar>
+            }
             <ListItemText
                 primary={
                     ready
                         ? <>
-                            <Typography variant={"h6"} display={"inline"}>{experience.title}</Typography>
-                            <Typography display={"inline"}>{` - ${experience.company}`}</Typography>
-                            {
-                                experience.website
-                                    ? <Tooltip title={experience.website}>
-                                        <IconButton component={"a"} href={experience.website} className={classes.websiteButton}>
-                                            <WebsiteIcon fontSize={"small"}/>
-                                        </IconButton>
-                                    </Tooltip> : <></>
-                            }
+                        {
+                            xsDown
+                                ? <>
+                                    <Toolbar style={{padding: "0px"}}>
+                                        <Avatar style={{marginRight: "16px"}} variant={"rounded"} alt={experience.company} src={experience.logo}/>
+                                        <Typography variant={"h6"} display={"inline"}>{experience.title}</Typography>
+                                    </Toolbar>
+                                </> : <>
+                                    <Typography variant={"h6"} display={"inline"}>{experience.title}</Typography>
+                                    <Typography display={"inline"}>{` - ${experience.company}`}</Typography>
+                                    {
+                                        experience.website
+                                            ? <Tooltip title={experience.website}>
+                                                <IconButton component={"a"} href={experience.website} className={classes.websiteButton}>
+                                                    <WebsiteIcon fontSize={"small"}/>
+                                                </IconButton>
+                                            </Tooltip> : <></>
+                                    }
+                                </>
+                        }
                         </>
                         : <Skeleton className={classes.skeleton40}/>
                 }
+                secondaryTypographyProps={{component: "span"}}
                 secondary={<>
                     <List disablePadding>
+                        {
+                            xsDown ? <ListItem className={classes.listItemNested}>
+                                <ListItemIcon className={classes.listItemIcon}><CompanyIcon fontSize={"small"}/></ListItemIcon>
+                                <ListItemText>{
+                                    ready
+                                        ? experience.company
+                                        : <Skeleton/>
+                                }</ListItemText>
+                            </ListItem> : <></>
+                        }
                         <ListItem className={classes.listItemNested}>
                             <ListItemIcon className={classes.listItemIcon}><DateIcon fontSize={"small"}/></ListItemIcon>
                             <ListItemText>{
@@ -133,8 +175,8 @@ const ExperienceItem = (props: ExperienceItemProps) => {
                             hasFullDescription && ready
                                 ? <Collapse in={open} timeout={"auto"} unmountOnExit>
                                         <List disablePadding>
-                                            <ListItem color={"primary"}>
-                                                <ListItemText primaryTypographyProps={{color: "textPrimary"}}>
+                                            <ListItem className={classes.markdown} color={"primary"}>
+                                                <ListItemText  primaryTypographyProps={{color: "textPrimary"}}>
                                                     <ReactMarkdown source={experience.fullDescription}/>
                                                 </ListItemText>
                                             </ListItem>
