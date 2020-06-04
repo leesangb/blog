@@ -5,7 +5,7 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
 
   switch (node.internal.type) {
     case 'Mdx': {
-      const {layout, title, date} = node.frontmatter;
+      const {layout, title, date, tags, thumb} = node.frontmatter;
       const {relativePath} = getNode(node.parent);
 
       const dirs = relativePath.split("/");
@@ -19,6 +19,8 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
       createNodeField({node, name: 'title', value: title || ''});
       createNodeField({node, name: 'date', value: date || ''});
       createNodeField({node, name: 'lang', value: locale});
+      createNodeField({node, name: 'tags', value: tags});
+      createNodeField({node, name: 'thumb', value: thumb ?? "https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg"});
     }
   }
 }

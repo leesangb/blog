@@ -17,6 +17,8 @@ const Posts = (props: {style?: React.CSSProperties}) => {
                 slug
                 title
                 lang
+                tags
+                thumb
               }
             }
           }

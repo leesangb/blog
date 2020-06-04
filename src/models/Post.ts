@@ -4,5 +4,5 @@ export interface Post {
     slug: string;
     lang: string;
     tags?: string[];
-    thumbnail?: string;
+    thumb?: string;
 }
