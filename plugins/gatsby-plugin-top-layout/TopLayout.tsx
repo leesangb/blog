@@ -7,7 +7,7 @@ import {useDarkMode} from "../../src/theme";
 import {enUS, frFR, koKR} from "@material-ui/core/locale";
 import Header from "../../src/components/Header";
 import {I18nextProvider, useTranslation} from "react-i18next";
-import { navigate } from "gatsby"
+import {navigate} from "gatsby"
 // @ts-ignore
 import { MDXProvider } from "@mdx-js/react"
 import {Link} from "@material-ui/core";
@@ -47,6 +47,7 @@ const getUrl = (props: any) => {
 const TopLayout = (props: {children: React.ReactNode, isSSR: boolean}) => {
     const {theme, toggleDarkMode} = useDarkMode();
     const {locale, path} = getLocale(getUrl(props));
+
     const classes = useStyles();
 
     const {i18n, ready} = useTranslation();

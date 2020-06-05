@@ -35,8 +35,10 @@ import TranslateIcon from '@material-ui/icons/TranslateRounded';
 import MenuIcon from '@material-ui/icons/MenuRounded';
 import CloseIcon from '@material-ui/icons/CloseRounded';
 import PostsIcon from '@material-ui/icons/ChromeReaderModeRounded';
-import {Link} from "gatsby";
+import {graphql, Link, useStaticQuery} from "gatsby";
 import {makeStyles} from "@material-ui/core/styles";
+import {Helmet} from "react-helmet";
+import {formatLangForHtml} from "../tools/helpers";
 
 interface HeaderProps {
     toggleDarkMode: () => "light" | "dark";
@@ -106,6 +108,8 @@ const Header = (props: HeaderProps) => {
     const [openDrawer, setOpenDrawer] = React.useState(false);
     const xsDown = useMediaQuery(theme.breakpoints.down('xs'));
 
+    const { site } = useStaticQuery(query);
+
     const handleClickNavigation = () => {
         setOpenDrawer(false);
     };
@@ -161,12 +165,27 @@ const Header = (props: HeaderProps) => {
 
     const navigations = getNavigations();
 
+    const handleDrawer = (open: boolean) => () => {
+        setOpenDrawer(open);
+    };
+
+    const handleExpand = (expand: boolean) => () => {
+        setExpand(expand);
+    };
+
     return props.isSSR ? <></> : <>
+        <Helmet htmlAttributes={{"lang": formatLangForHtml(i18n.language)}}>
+            <title>{site.siteMetadata.title}</title>
+            <meta name="description" content={site.siteMetadata.description}/>
+            <meta property="og:title" content={site.siteMetadata.title} />
+            <meta property="og:description" content={site.siteMetadata.description} />
+            <meta property="og:url" content={`${site.siteMetadata.siteUrl}${window.location.pathname}`} />
+        </Helmet>
         <AppBar className={classes.appBar} elevation={0} position={"sticky"} color={"inherit"}>
             <Toolbar>
                 {
                     xsDown
-                        ? <IconButton onClick={() => setOpenDrawer(!openDrawer)}>
+                        ? <IconButton aria-label={"Open Navigation Menu"} onClick={handleDrawer(!openDrawer)}>
                             {
                                 openDrawer
                                     ? <CloseIcon/>
@@ -188,7 +207,7 @@ const Header = (props: HeaderProps) => {
                         </ButtonGroup>
                 }
                 <div className={classes.separatorDiv}/>
-                <IconButton onClick={clickSettings}>
+                <IconButton aria-label={"Open Settings"} onClick={clickSettings}>
                     <SettingsIcon/>
                 </IconButton>
 
@@ -198,8 +217,8 @@ const Header = (props: HeaderProps) => {
                         open={openDrawer}
                         disableBackdropTransition={!iOS}
                         disableDiscovery={iOS}
-                        onClose={() => setOpenDrawer(false)}
-                        onOpen={() => setOpenDrawer(true)}
+                        onClose={handleDrawer(false)}
+                        onOpen={handleDrawer(true)}
                         className={classes.drawer}
                     >
                         <List className={classes.drawerList}>
@@ -220,7 +239,7 @@ const Header = (props: HeaderProps) => {
                          anchorEl={anchorEl}
                          style={{zIndex: 1500}}
                          anchorOrigin={{vertical: "bottom", horizontal: "right"}}>
-                    <Card onMouseLeave={() => setExpand(false)}>
+                    <Card onMouseLeave={handleExpand(false)}>
                         <CardContent>
                             <ListItem className={classes.listItem} button onClick={handleChangeTheme}>
                                 <ListItemIcon className={classes.popOverListItemIcon}>
@@ -230,7 +249,7 @@ const Header = (props: HeaderProps) => {
                             </ListItem>
                             <Divider />
                             <List disablePadding>
-                                <ListItem className={classes.listItem} onMouseEnter={expandLang} onClick={toggleExpandLang}>
+                                <ListItem className={classes.listItem} button aria-label={"Select Language"} onMouseEnter={expandLang} onClick={toggleExpandLang}>
                                     <ListItemIcon className={classes.popOverListItemIcon}>
                                         <TranslateIcon/>
                                     </ListItemIcon>
@@ -262,5 +281,17 @@ const Header = (props: HeaderProps) => {
 Header.defaultProps = {
     isSSR: false,
 };
+
+
+export const query = graphql`
+  query SiteQuery {
+    site {
+      siteMetadata {
+        title
+        description
+        siteUrl
+      }
+    }
+  }`;
 
 export default Header;
