@@ -3,7 +3,6 @@ const LOCALE = "LOCALE";
 
 export const isBrowser = typeof window !== "undefined";
 
-
 export const saveThemeType = (type: "light" | "dark") => {
     if (isBrowser)
         window.localStorage.setItem(THEME_TYPE, type);
@@ -36,7 +35,7 @@ const normalizeLocale = (lang: string): string => {
     if (lang.startsWith("ko") || lang.startsWith("kr"))
         return "kr";
     return "en";
-}
+};
 
 export const loadLocale = (): ("en" | "fr" | "kr") => {
     if (isBrowser) {

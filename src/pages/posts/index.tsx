@@ -23,7 +23,7 @@ const Posts = (props: {style?: React.CSSProperties}) => {
             }
           }
         }
-    `)
+    `);
 
     const allPosts: Post[] = allMdx.nodes.map((n: { fields: Post }) => ({ ...n.fields, date: new Date(n.fields.date) }));
 

@@ -16,6 +16,6 @@ const Home: React.FC = () => {
                 </ElevationCard>
             </Grow>
         </> : <></>);
-}
+};
 
 export default Home;

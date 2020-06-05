@@ -11,6 +11,6 @@ const NotFound = () => {
         <Divider/>
         <Button component={Link} to={"/"}>{t("go to home")}</Button>
     </> : <></>
-}
+};
 
 export default NotFound;

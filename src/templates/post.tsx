@@ -47,9 +47,9 @@ const PostTemplate: React.FC<PostTemplateProps> = ({ data }) => (
             </CardContent>
         </ElevationCard>
     </>
-)
+);
 
-export default PostTemplate
+export default PostTemplate;
 
 export const query = graphql`
   query PageTemplateQuery($slug: String!) {
@@ -75,4 +75,4 @@ export const query = graphql`
       excerpt
     }
   }
-`
+`;
