@@ -20,7 +20,7 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
       createNodeField({node, name: 'date', value: date || ''});
       createNodeField({node, name: 'lang', value: locale});
       createNodeField({node, name: 'tags', value: tags});
-      createNodeField({node, name: 'thumb', value: thumb ?? "https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg"});
+      createNodeField({node, name: 'thumb', value: (thumb ? thumb : "https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg")});
     }
   }
 }
