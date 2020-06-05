@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     profile: {
         [theme.breakpoints.down('xs')]: {
-            height: "100px"
+            height: "100px",
         }
     },
     profileToolbar: {
@@ -80,7 +80,10 @@ const useStyles = makeStyles((theme: Theme) => ({
         [theme.breakpoints.down('xs')]: {
             padding: "14px"
         }
-    }
+    },
+    flexGrowXs: {
+        flexGrow: 1
+    },
 }));
 
 const ProfileCard = () => {
@@ -129,7 +132,7 @@ const ProfileCard = () => {
                 : <Skeleton className={classes.skeletonName}/>
         }
         <Hidden xsDown>
-            <div style={{flexGrow: 1}}/>
+            <div className={classes.flexGrowXs}/>
         </Hidden>
         <Tooltip title={profile.email}>
             <IconButton className={classes.iconButton} component={"a"} href={`mailto:${profile.email}`}>

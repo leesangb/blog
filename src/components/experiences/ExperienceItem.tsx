@@ -7,7 +7,7 @@ import {
     ListItem,
     ListItemAvatar,
     ListItemIcon,
-    ListItemText, Toolbar,
+    ListItemText, Theme, Toolbar,
     Tooltip,
     Typography,
     useMediaQuery, useTheme
@@ -35,10 +35,13 @@ interface ExperienceItemProps {
     ready?: boolean;
 }
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme: Theme) => ({
     listItemRoot: {
         borderRadius: "25px",
         alignItems: "flex-start",
+        [theme.breakpoints.down('xs')]: {
+            paddingRight: "4px"
+        }
     },
     skeletonAvatar: {
         height: "40px",
@@ -65,7 +68,10 @@ const useStyles = makeStyles(() => ({
     },
     markdown: {
         padding: 0
-    }
+    },
+    skills: {
+        marginTop:"10px",
+    },
 }));
 
 const ExperienceItem = (props: ExperienceItemProps) => {
@@ -187,7 +193,9 @@ const ExperienceItem = (props: ExperienceItemProps) => {
                     </List>
                     {
                         ready
-                            ? experience.skills.map(s => <Chip key={s} className={classes.skillChip} label={s}/>)
+                            ? <div className={classes.skills}>
+                                {experience.skills.map(s => <Chip key={s} className={classes.skillChip} label={s}/>)}
+                            </div>
                             : <Skeleton className={classes.skeleton40}/>
                     }
                 </>}
