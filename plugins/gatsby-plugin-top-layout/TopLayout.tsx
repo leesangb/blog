@@ -2,7 +2,7 @@ import * as React from 'react';
 import i18next from "../../src/locales/i18next";
 import { Helmet } from 'react-helmet';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import {createMuiTheme, makeStyles, MuiThemeProvider} from '@material-ui/core/styles';
+import {createMuiTheme, makeStyles, Theme, ThemeProvider} from '@material-ui/core/styles';
 import {useDarkMode} from "../../src/theme";
 import {enUS, frFR, koKR} from "@material-ui/core/locale";
 import Header from "../../src/components/Header";
@@ -13,6 +13,7 @@ import { MDXProvider } from "@mdx-js/react"
 import {Link} from "@material-ui/core";
 import {useEffect} from "react";
 import {isBrowser, loadLocale, saveLocale} from "../../src/tools/localStorage";
+import "prism-themes/themes/prism-material-dark.css";
 
 
 const shortcodes = { Link }
@@ -48,12 +49,12 @@ export default function TopLayout(props: {children: React.ReactNode}) {
     const {locale, path} = getLocale(getUrl(props));
     const classes = useStyles();
 
-    const {i18n} = useTranslation();
+    const {i18n, ready} = useTranslation();
 
     const muiLocale = locale === "en" ? enUS : locale === "fr" ? frFR : koKR;
     const [localization, setLocalization] = React.useState(muiLocale);
+    const [simpleTheme, setSimpleTheme] = React.useState<Theme>(createMuiTheme(theme, localization));
 
-    const simpleTheme = createMuiTheme(theme, localization);
 
     useEffect(() => {
         if (i18n.language === "kr")
@@ -65,14 +66,18 @@ export default function TopLayout(props: {children: React.ReactNode}) {
 
         navigate(`/${i18n.language}${path}`);
         saveLocale(i18n.language as ("en" | "fr" | "kr"));
-    }, [i18n.language]);
+    }, [i18n.language, ready]);
 
-    return <React.Fragment>
+    useEffect(() => {
+        setSimpleTheme(createMuiTheme(theme, localization));
+    }, [theme, localization]);
+
+    return ready ? <>
         <Helmet>
             <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
             <meta content="text/html; charset=utf-8" />
         </Helmet>
-        <MuiThemeProvider theme={simpleTheme}>
+        <ThemeProvider theme={simpleTheme}>
             <I18nextProvider i18n={i18next}>
                 <MDXProvider components={shortcodes}>
                     <CssBaseline />
@@ -82,6 +87,6 @@ export default function TopLayout(props: {children: React.ReactNode}) {
                     </div>
                 </MDXProvider>
             </I18nextProvider>
-        </MuiThemeProvider>
-    </React.Fragment>
+        </ThemeProvider>
+    </> : <></>
 }

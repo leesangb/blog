@@ -19,6 +19,7 @@ module.exports = {
         languages: ["en", "fr", "kr"],
     },
     plugins: [
+        "gatsby-plugin-no-sourcemaps",
         "gatsby-plugin-material-ui",
         "gatsby-plugin-react-helmet",
         "gatsby-plugin-top-layout",
