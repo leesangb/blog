@@ -70,7 +70,7 @@ export default function TopLayout(props: {children: React.ReactNode}) {
     return <React.Fragment>
         <Helmet>
             <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
-            <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap" rel="stylesheet"/>
+            <meta content="text/html; charset=utf-8" />
         </Helmet>
         <MuiThemeProvider theme={simpleTheme}>
             <I18nextProvider i18n={i18next}>
