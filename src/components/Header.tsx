@@ -40,6 +40,7 @@ import {makeStyles} from "@material-ui/core/styles";
 
 interface HeaderProps {
     toggleDarkMode: () => "light" | "dark";
+    isSSR: boolean;
 }
 
 interface Navigation {
@@ -94,7 +95,6 @@ const useStyles = makeStyles(() => ({
 }));
 
 
-
 const Header = (props: HeaderProps) => {
     const { t, i18n } = useTranslation();
     const { toggleDarkMode } = props;
@@ -134,7 +134,7 @@ const Header = (props: HeaderProps) => {
 
     const handleChangeTheme = () => {
         setThemeType(toggleDarkMode());
-    }
+    };
 
     const clickSettings = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(anchorEl ? null : event.currentTarget);
@@ -142,7 +142,7 @@ const Header = (props: HeaderProps) => {
 
     const expandLang = () => {
         setExpand(true);
-    }
+    };
 
     const toggleExpandLang = () => {
         setExpand(!expand);
@@ -161,7 +161,7 @@ const Header = (props: HeaderProps) => {
 
     const navigations = getNavigations();
 
-    return <>
+    return props.isSSR ? <></> : <>
         <AppBar className={classes.appBar} elevation={0} position={"sticky"} color={"inherit"}>
             <Toolbar>
                 {
@@ -257,6 +257,10 @@ const Header = (props: HeaderProps) => {
             </Toolbar>
         </AppBar>
     </>
+};
+
+Header.defaultProps = {
+    isSSR: false,
 };
 
 export default Header;

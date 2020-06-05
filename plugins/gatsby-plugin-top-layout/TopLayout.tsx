@@ -34,7 +34,7 @@ const getLocale = (path: string): {locale: ("en" | "fr" | "kr"), path: string} =
     const locale = split[1] as ("en" | "fr" | "kr");
     const newPath = `/${split.slice(2).join("/")}`;
     return {locale, path: newPath};
-}
+};
 
 const getUrl = (props: any) => {
     if (isBrowser) {
@@ -42,9 +42,9 @@ const getUrl = (props: any) => {
     }
     // FIXME
     return props.children.props.children.props.url;
-}
+};
 
-export default function TopLayout(props: {children: React.ReactNode}) {
+const TopLayout = (props: {children: React.ReactNode, isSSR: boolean}) => {
     const {theme, toggleDarkMode} = useDarkMode();
     const {locale, path} = getLocale(getUrl(props));
     const classes = useStyles();
@@ -81,7 +81,7 @@ export default function TopLayout(props: {children: React.ReactNode}) {
             <I18nextProvider i18n={i18next}>
                 <MDXProvider components={shortcodes}>
                     <CssBaseline />
-                    <Header toggleDarkMode={toggleDarkMode}/>
+                    <Header toggleDarkMode={toggleDarkMode} isSSR={props.isSSR}/>
                     <div className={classes.container}>
                         {props.children}
                     </div>
@@ -89,4 +89,10 @@ export default function TopLayout(props: {children: React.ReactNode}) {
             </I18nextProvider>
         </ThemeProvider>
     </> : <></>
-}
+};
+
+TopLayout.defaultProps = {
+    isSSR: false,
+};
+
+export default TopLayout;
