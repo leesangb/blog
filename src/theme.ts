@@ -57,7 +57,7 @@ const themeOptions: ThemeOptions = {
 };
 
 export const useDarkMode = () => {
-    const [theme, setTheme] = useState<ThemeOptions | undefined>(themeOptions);
+    const [theme, setTheme] = useState<ThemeOptions>(themeOptions);
 
     const toggleDarkMode = (): "light" | "dark" => {
         const updatedTheme: ThemeOptions = {

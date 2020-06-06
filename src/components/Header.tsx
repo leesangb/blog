@@ -19,7 +19,7 @@ import {
     useMediaQuery,
     useTheme
 } from "@material-ui/core";
-import {ReactNode, useCallback} from "react";
+import {ReactNode, useCallback, useContext} from "react";
 import * as React from "react";
 import {useTranslation} from "react-i18next";
 import {iOS} from "../tools/deviceHelper"
@@ -35,22 +35,16 @@ import TranslateIcon from '@material-ui/icons/TranslateRounded';
 import MenuIcon from '@material-ui/icons/MenuRounded';
 import CloseIcon from '@material-ui/icons/CloseRounded';
 import PostsIcon from '@material-ui/icons/ChromeReaderModeRounded';
-import {graphql, Link, useStaticQuery} from "gatsby";
+import {Link} from "gatsby";
 import {makeStyles} from "@material-ui/core/styles";
-import {Helmet} from "react-helmet";
-import {formatLangForHtml} from "../tools/helpers";
+import TopLayoutContext from "./contexts/TopLayoutContext";
 
-interface HeaderProps {
-    toggleDarkMode: () => "light" | "dark";
-    isSSR: boolean;
-}
 
 interface Navigation {
     key: string;
     icon: (style?: React.CSSProperties, className?: string) => ReactNode;
     link: string;
 }
-
 
 const useStyles = makeStyles(() => ({
     appBar: {
@@ -97,9 +91,9 @@ const useStyles = makeStyles(() => ({
 }));
 
 
-const Header = (props: HeaderProps) => {
+const Header = () => {
     const { t, i18n } = useTranslation();
-    const { toggleDarkMode } = props;
+    const { toggleDarkMode } = useContext(TopLayoutContext)!;
     const classes = useStyles();
     const [themeType, setThemeType] = React.useState(loadThemeType());
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -108,7 +102,6 @@ const Header = (props: HeaderProps) => {
     const [openDrawer, setOpenDrawer] = React.useState(false);
     const xsDown = useMediaQuery(theme.breakpoints.down('xs'));
 
-    const { site } = useStaticQuery(query);
 
     const handleClickNavigation = () => {
         setOpenDrawer(false);
@@ -173,14 +166,7 @@ const Header = (props: HeaderProps) => {
         setExpand(expand);
     };
 
-    return props.isSSR ? <></> : <>
-        <Helmet htmlAttributes={{"lang": formatLangForHtml(i18n.language)}}>
-            <title>{site.siteMetadata.title}</title>
-            <meta name="description" content={site.siteMetadata.description}/>
-            <meta property="og:title" content={site.siteMetadata.title} />
-            <meta property="og:description" content={site.siteMetadata.description} />
-            <meta property="og:url" content={`${site.siteMetadata.siteUrl}${window.location.pathname}`} />
-        </Helmet>
+    return <>
         <AppBar className={classes.appBar} elevation={0} position={"sticky"} color={"inherit"}>
             <Toolbar>
                 {
@@ -277,21 +263,5 @@ const Header = (props: HeaderProps) => {
         </AppBar>
     </>
 };
-
-Header.defaultProps = {
-    isSSR: false,
-};
-
-
-export const query = graphql`
-  query SiteQuery {
-    site {
-      siteMetadata {
-        title
-        description
-        siteUrl
-      }
-    }
-  }`;
 
 export default Header;

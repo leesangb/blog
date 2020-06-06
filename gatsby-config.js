@@ -22,7 +22,6 @@ module.exports = {
         "gatsby-plugin-no-sourcemaps",
         "gatsby-plugin-material-ui",
         "gatsby-plugin-react-helmet",
-        "gatsby-plugin-top-layout",
         "gatsby-plugin-typescript",
         {
             resolve: "gatsby-source-filesystem",
