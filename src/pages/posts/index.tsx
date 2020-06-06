@@ -3,13 +3,20 @@ import * as React from "react";
 import PostCard from "../../components/PostCard";
 import {Post} from "../../models";
 import {useTranslation} from "react-i18next";
-import {graphql, useStaticQuery} from "gatsby";
+import {graphql, Link, useStaticQuery} from "gatsby";
+import {makeStyles} from "@material-ui/core/styles";
+
+const useStyles = makeStyles(() => ({
+    postItem: {
+        textDecoration: "none"
+    }
+}))
 
 const Posts = (props: {style?: React.CSSProperties}) => {
     const { i18n } = useTranslation();
 
     const { allMdx } = useStaticQuery(graphql`
-        query GetPostsAndImages {
+        query GetPosts {
           allMdx(filter: {fields: {layout: {eq: "post"}}}, sort: {order: DESC, fields: fields___date}) {
             nodes {
               fields {
@@ -32,11 +39,16 @@ const Posts = (props: {style?: React.CSSProperties}) => {
     const en = allPosts.filter(p => p.lang === "en");
 
     const posts = i18n.language === "kr" ? kr : i18n.language === "fr" ? fr : en;
+    const classes = useStyles();
 
     return <>
         <Grid container spacing={2}>
             {
-                posts.map((p: Post, i: number) => <Grid key={i} item xs={12} sm={6} md={4} lg={3} xl={2}>
+                posts.map((p: Post, i: number) => <Grid component={Link} to={p.slug}
+                                                        className={classes.postItem}
+                                                        key={i}
+                                                        item
+                                                        xs={12} sm={6} md={4} lg={3} xl={2}>
                     <Grow in={true} timeout={200 + i * 125}>
                         <div style={{...props.style}}>
                             <PostCard post={p}/>

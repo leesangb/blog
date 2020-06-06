@@ -7,7 +7,6 @@ import {useCallback} from "react";
 import {enUS, fr, ko} from "date-fns/locale";
 import {format} from "date-fns";
 import {Skeleton} from "@material-ui/lab";
-import { navigate } from "gatsby"
 import {makeStyles} from "@material-ui/core/styles";
 
 interface PostCardProps {
@@ -36,11 +35,7 @@ const PostCard = (props: PostCardProps) => {
         return format(post.date, t("dateFormat"), {locale});
     }, [i18n.language, t, post.date]);
 
-    const handleClickCard = () => {
-        navigate(post.slug);
-    }
-
-    return <ElevationCard onClick={handleClickCard}>
+    return <ElevationCard>
             <CardActionArea>
                 <CardMedia className={classes.cardMedia} image={post.thumb}/>
                 <CardContent>
