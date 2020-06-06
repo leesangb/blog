@@ -19,6 +19,7 @@ module.exports = {
         languages: ["en", "fr", "kr"],
     },
     plugins: [
+        "gatsby-plugin-catch-links",
         "gatsby-plugin-no-sourcemaps",
         "gatsby-plugin-material-ui",
         "gatsby-plugin-react-helmet",
@@ -56,6 +57,14 @@ module.exports = {
                 ]
             }
         },
+        {
+            resolve: "gatsby-plugin-sharp",
+            options: {
+                useMozJpeg: false,
+                stripMetadata: true,
+                defaultQuality: 75,
+            },
+        },
         "gatsby-transformer-sharp",
     ],
-}
+};
