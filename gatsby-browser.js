@@ -7,6 +7,6 @@ export const wrapRootElement = ({ element }) => {
     return <TopLayout>{element}</TopLayout>;
 };
 
-export const wrapPageElement = ({ element, props }) => {
-    return <Layout pathname={props.location.pathname}>{element}</Layout>
+export const wrapPageElement = ({ element }) => {
+    return <Layout>{element}</Layout>
 };
