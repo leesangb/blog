@@ -116,7 +116,7 @@ const ProfileCard = () => {
         firstname: t("profile.firstname"),
         picture: getImage("profile_memoji.png"),
         linkedin: "https://www.linkedin.com/in/sangbin-lee",
-        github: "https://github.com/sb59",
+        github: "https://github.com/leesangb",
         email: "leesangbin@outlook.com",
         description: t("profile.description")
     };
