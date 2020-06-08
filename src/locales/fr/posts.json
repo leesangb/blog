@@ -1,4 +1,3 @@
 {
-  "dateFormat": "do MMMM yyyy",
-  "first post": "Première publication"
+  "dateFormat": "d MMMM yyyy"
 }
