@@ -44,6 +44,7 @@ module.exports = {
             options: {
                 extensions: [".mdx", ".md"],
                 gatsbyRemarkPlugins: [
+                    "gatsby-remark-graphviz",
                     "gatsby-remark-prismjs",
                     {
                         resolve: "gatsby-remark-images",
