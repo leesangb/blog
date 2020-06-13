@@ -49,7 +49,7 @@ const Posts = (props: {style?: React.CSSProperties}) => {
                                                         key={i}
                                                         item
                                                         xs={12} sm={6} md={4} lg={3} xl={2}>
-                    <Grow in={true} timeout={200 + i * 125}>
+                    <Grow in={true} timeout={500}>
                         <div style={{...props.style}}>
                             <PostCard post={p}/>
                         </div>

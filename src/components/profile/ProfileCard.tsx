@@ -53,7 +53,8 @@ const useStyles = makeStyles((theme: Theme) => ({
         },
     },
     aboutMe: {
-        margin: "10px"
+        fontWeight: 700,
+        margin: "30px"
     },
     skeletonAboutMe: {
         margin: "10px",
@@ -70,10 +71,10 @@ const useStyles = makeStyles((theme: Theme) => ({
         height: "50px",
     },
     emailIcon: {
-        color: "#F54242",
+        //color: "#F54242",
     },
     linkedInIcon: {
-        color:"#0077B5",
+        //color:"#0077B5",
     },
     cardContent: {
         [theme.breakpoints.down('xs')]: {
@@ -85,7 +86,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
 }));
 
-const ProfileCard = () => {
+const ProfileCard = (props: {style?: React.CSSProperties}) => {
     const { t, i18n, ready } = useTranslation("me");
     const classes = useStyles();
 
@@ -103,12 +104,12 @@ const ProfileCard = () => {
             }
           }
         }
-    `)
+    `);
 
     const images: {url: string, name: string}[] = allFile.edges.map((e: {node: {publicURL: string, relativePath: string}}) => ({url: e.node.publicURL, name: e.node.relativePath}));
     const getImage = (name: string): string => {
         return images.find(i => i.name === name)?.url ?? "";
-    }
+    };
 
     const profile: ProfileModel = {
         lastname: t("profile.lastname"),
@@ -150,34 +151,36 @@ const ProfileCard = () => {
         </Tooltip>
     </>;
 
-    return <Grow in={ready}>
-        <Card elevation={6}>
-            <CardContent className={classes.cardContent}>
-                {
-                    ready
-                        ? <Typography className={classes.aboutMe} variant={"h5"}>{t("about me")}</Typography>
-                        : <Skeleton className={classes.skeletonAboutMe}/>
-                }
-                {
-                    ready
-                        ? <Avatar className={classes.avatar} variant={"circle"} alt={profile.firstname} src={profile.picture}/>
-                        : <Skeleton className={classes.avatar} variant={"circle"}/>
-                }
-                {
-                    xsDown
-                        ? <Paper elevation={0} className={classes.profile}><Profile/></Paper>
-                        : <Toolbar className={classes.profileToolbar}><Profile/></Toolbar>
-                }
-                {
-                    ready
-                        ? <Typography>{profile.description}</Typography>
-                        : <>
-                            <Skeleton className={classes.skeletonDescription}/>
-                            <Skeleton className={classes.skeletonDescription}/>
-                        </>
-                }
-            </CardContent>
-        </Card>
+    return <Grow in timeout={500}>
+        <div style={props.style}>
+            {
+                ready
+                    ? <Typography className={classes.aboutMe} variant={xsDown ? "h4" : "h3"}>{t("about me")}</Typography>
+                    : <Skeleton className={classes.skeletonAboutMe}/>
+            }
+            <Card elevation={6}>
+                <CardContent className={classes.cardContent}>
+                    {
+                        ready
+                            ? <Avatar className={classes.avatar} variant={"circle"} alt={profile.firstname} src={profile.picture}/>
+                            : <Skeleton className={classes.avatar} variant={"circle"}/>
+                    }
+                    {
+                        xsDown
+                            ? <Paper elevation={0} className={classes.profile}><Profile/></Paper>
+                            : <Toolbar className={classes.profileToolbar}><Profile/></Toolbar>
+                    }
+                    {
+                        ready
+                            ? <Typography>{profile.description}</Typography>
+                            : <>
+                                <Skeleton className={classes.skeletonDescription}/>
+                                <Skeleton className={classes.skeletonDescription}/>
+                            </>
+                    }
+                </CardContent>
+            </Card>
+        </div>
     </Grow>
 };
 

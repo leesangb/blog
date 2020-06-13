@@ -37,10 +37,12 @@ interface ExperienceItemProps {
 
 const useStyles = makeStyles((theme: Theme) => ({
     listItemRoot: {
+        padding: "20px",
         borderRadius: "25px",
         alignItems: "flex-start",
         [theme.breakpoints.down('xs')]: {
-            paddingRight: "4px"
+            paddingRight: "4px",
+            paddingTop: "4px"
         }
     },
     skeletonAvatar: {
@@ -67,11 +69,25 @@ const useStyles = makeStyles((theme: Theme) => ({
         height: "40px",
     },
     markdown: {
-        padding: 0
+        padding: 0,
+        marginTop: "10px",
+        marginBottom: "10px"
     },
     skills: {
         marginTop:"10px",
     },
+    toolbar: {
+        padding: 0
+    },
+    title: {
+        fontWeight: 700
+    },
+    companyAvatar: {
+        marginRight: "16px"
+    },
+    titleDiv: {
+        marginBottom: "12px"
+    }
 }));
 
 const ExperienceItem = (props: ExperienceItemProps) => {
@@ -120,12 +136,12 @@ const ExperienceItem = (props: ExperienceItemProps) => {
                         {
                             xsDown
                                 ? <>
-                                    <Toolbar style={{padding: "0px"}}>
-                                        <Avatar style={{marginRight: "16px"}} variant={"rounded"} alt={experience.company} src={experience.logo}/>
-                                        <Typography variant={"h6"} display={"inline"}>{experience.title}</Typography>
+                                    <Toolbar className={classes.toolbar}>
+                                        <Avatar className={classes.companyAvatar} variant={"rounded"} alt={experience.company} src={experience.logo}/>
+                                        <Typography className={classes.title} variant={"h6"} display={"inline"}>{experience.title}</Typography>
                                     </Toolbar>
-                                </> : <>
-                                    <Typography variant={"h6"} display={"inline"}>{experience.title}</Typography>
+                                </> : <div className={classes.titleDiv}>
+                                    <Typography className={classes.title}  variant={"h6"} display={"inline"}>{experience.title}</Typography>
                                     <Typography display={"inline"}>{` - ${experience.company}`}</Typography>
                                     {
                                         experience.website
@@ -135,7 +151,7 @@ const ExperienceItem = (props: ExperienceItemProps) => {
                                                 </IconButton>
                                             </Tooltip> : <></>
                                     }
-                                </>
+                                </div>
                         }
                         </>
                         : <Skeleton className={classes.skeleton40}/>
