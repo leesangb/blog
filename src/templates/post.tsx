@@ -45,6 +45,10 @@ const useStyles = makeStyles(() => ({
     },
     divider: {
         marginTop: "10px"
+    },
+    container: {
+        margin:"auto",
+        maxWidth: "1300px"
     }
 }));
 
@@ -68,19 +72,21 @@ const PostTemplate: React.FC<PostTemplateProps> = ({ data }) => {
                 <meta property="og:image" content={data.mdx.fields.thumb}/>
                 <meta name="keywords" content={data.mdx.fields.tags?.join(",")}/>
             </Helmet>
-            <ElevationCard>
-                <CardContent>
-                    <h1>{data.mdx.fields.title}</h1>
-                    <Typography>{formatDate(data.mdx.fields.date)} • {data.mdx.timeToRead} min read</Typography>
-                    <Divider className={classes.divider}/>
-                    <MDXRenderer>{data.mdx.body}</MDXRenderer>
-                </CardContent>
-                <CardActions>
-                    {
-                        data.mdx.fields.tags?.map(t => <Chip key={t} className={classes.tag} label={t}/>)
-                    }
-                </CardActions>
-            </ElevationCard>
+            <div className={classes.container}>
+                <ElevationCard>
+                    <CardContent>
+                        <h1>{data.mdx.fields.title}</h1>
+                        <Typography>{formatDate(data.mdx.fields.date)} • {data.mdx.timeToRead} min read</Typography>
+                        <Divider className={classes.divider}/>
+                        <MDXRenderer>{data.mdx.body}</MDXRenderer>
+                    </CardContent>
+                    <CardActions>
+                        {
+                            data.mdx.fields.tags?.map(t => <Chip key={t} className={classes.tag} label={t}/>)
+                        }
+                    </CardActions>
+                </ElevationCard>
+            </div>
         </>
     );
 }

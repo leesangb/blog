@@ -6,15 +6,18 @@ import {graphql, navigate, useStaticQuery} from "gatsby";
 import {loadLocale, saveLocale} from "../tools/localStorage";
 import TopLayoutContext from "./contexts/TopLayoutContext";
 import Header from "./Header";
-import {makeStyles} from "@material-ui/core/styles";
+import {makeStyles, Theme} from "@material-ui/core/styles";
 import {Helmet} from "react-helmet";
 import {formatLangForHtml} from "../tools/helpers";
 import {useLocation} from "@reach/router";
 
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme: Theme) => ({
     container: {
-        padding: "20px 12px 12px 12px"
+        margin: "60px",
+        [theme.breakpoints.down('xs')]: {
+            margin: "12px",
+        },
     }
 }));
 

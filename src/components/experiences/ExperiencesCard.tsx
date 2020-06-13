@@ -1,8 +1,6 @@
-import {CardContent, Divider, Grow, List, Theme, Typography} from "@material-ui/core";
-import {Skeleton} from "@material-ui/lab";
+import {Card, CardContent, Grid, Grow, Theme, useMediaQuery, useTheme} from "@material-ui/core";
 import * as React from "react";
 import {useTranslation} from "react-i18next";
-import ElevationCard from "../ElevationCard";
 import {Experience} from "../../models";
 import ExperienceItem from "./ExperienceItem";
 import {makeStyles} from "@material-ui/core/styles";
@@ -39,6 +37,8 @@ interface Image {
 
 const ExperiencesCard = () => {
     const {t, ready} = useTranslation("me");
+    const theme = useTheme();
+    const xsDown = useMediaQuery(theme.breakpoints.down('xs'));
 
     const classes = useStyles();
 
@@ -115,27 +115,34 @@ const ExperiencesCard = () => {
     ];
 
     return <Grow in={ready}>
-        <ElevationCard>
-            <CardContent className={classes.cardContent}>
-                {
-                    ready
-                        ? <Typography className={classes.title} variant={"h5"}>{t("experiences")}</Typography>
-                        : <Skeleton className={classes.skeletonTitle}/>
-                }
-                <List>
+        <Grid container spacing={xsDown ? 2 : 6}>
+            <Grid item xs={12} md={6}>
+                <Grid container spacing={xsDown ? 2 : 6}>
                     {
-                        experiences.map((e, i) => <React.Fragment key={`${i}`}>
-                            <ExperienceItem experience={e} ready={ready}/>
-                            {
-                                i === experiences.length - 1
-                                    ? <></>
-                                    : <Divider variant={"inset"} className={classes.divider} component={"li"}/>
-                            }
-                        </React.Fragment>)
+                        experiences.filter((_, i) => (i + 1) % 2).map((e, i) => <Grid xs={12} item key={`${i}`}>
+                            <Card elevation={6}>
+                                <CardContent className={classes.cardContent}>
+                                    <ExperienceItem experience={e} ready={ready}/>
+                                </CardContent>
+                            </Card>
+                        </Grid>)
                     }
-                </List>
-            </CardContent>
-        </ElevationCard>
+                </Grid>
+            </Grid>
+            <Grid item xs={12} md={6}>
+                <Grid container spacing={xsDown ? 2 : 6}>
+                    {
+                        experiences.filter((_, i) => i % 2).map((e, i) => <Grid xs={12} item key={`${i}`}>
+                            <Card elevation={6}>
+                                <CardContent className={classes.cardContent}>
+                                    <ExperienceItem experience={e} ready={ready}/>
+                                </CardContent>
+                            </Card>
+                        </Grid>)
+                    }
+                </Grid>
+            </Grid>
+        </Grid>
     </Grow>
 };
 
