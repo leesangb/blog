@@ -1,13 +1,20 @@
 import * as React from "react";
 import Experiences from "../components/experiences/ExperiencesCard";
 import Profile from "../components/profile/ProfileCard";
-import {makeStyles} from "@material-ui/core/styles";
+import {makeStyles, Theme} from "@material-ui/core/styles";
 import {Helmet} from "react-helmet";
 import {useTranslation} from "react-i18next";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme: Theme) => ({
     divider: {
-        margin: "10px"
+        margin: "20px",
+        [theme.breakpoints.down('xs')]: {
+            margin: "10px",
+        },
+    },
+    container: {
+        maxWidth: "1300px",
+        margin: "auto"
     }
 }));
 
@@ -23,9 +30,11 @@ const Me = () => {
                 <meta property="og:description" content={t("profile.description")}/>
             </Helmet> : <></>
         }
-        <Profile/>
-        <div className={classes.divider}/>
-        <Experiences/>
+        <div className={classes.container}>
+            <Profile/>
+            <div className={classes.divider}/>
+            <Experiences/>
+        </div>
     </>;
 };
 
