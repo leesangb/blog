@@ -7,9 +7,9 @@ import {useTranslation} from "react-i18next";
 
 const useStyles = makeStyles((theme: Theme) => ({
     divider: {
-        margin: "20px",
+        margin: "40px",
         [theme.breakpoints.down('xs')]: {
-            margin: "10px",
+            margin: "20px",
         },
     },
     container: {

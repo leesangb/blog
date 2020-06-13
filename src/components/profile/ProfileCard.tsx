@@ -1,5 +1,5 @@
 import {
-    Avatar,
+    Avatar, Card,
     CardContent,
     Grow,
     Hidden,
@@ -16,7 +16,6 @@ import {makeStyles} from "@material-ui/core/styles";
 import {Skeleton} from "@material-ui/lab";
 import * as React from "react";
 import {useTranslation} from "react-i18next";
-import ElevationCard from "../ElevationCard";
 import LinkedInIcon from "@material-ui/icons/LinkedIn";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import EmailIcon from "@material-ui/icons/EmailRounded";
@@ -152,7 +151,7 @@ const ProfileCard = () => {
     </>;
 
     return <Grow in={ready}>
-        <ElevationCard>
+        <Card elevation={6}>
             <CardContent className={classes.cardContent}>
                 {
                     ready
@@ -178,7 +177,7 @@ const ProfileCard = () => {
                         </>
                 }
             </CardContent>
-        </ElevationCard>
+        </Card>
     </Grow>
 };
 

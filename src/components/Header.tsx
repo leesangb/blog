@@ -233,7 +233,7 @@ const Header = () => {
                                 </ListItemIcon>
                                 <ListItemText className={classes.popOverListItemText} primary={t(themeType)}/>
                             </ListItem>
-                            <Divider />
+                            <Divider className={classes.divider} />
                             <List disablePadding>
                                 <ListItem className={classes.listItem} button aria-label={"Select Language"} onMouseEnter={expandLang} onClick={toggleExpandLang}>
                                     <ListItemIcon className={classes.popOverListItemIcon}>
