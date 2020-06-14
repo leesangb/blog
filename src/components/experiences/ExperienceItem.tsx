@@ -2,15 +2,11 @@ import {
     Avatar,
     Chip,
     Collapse,
-    IconButton,
     List,
     ListItem,
-    ListItemAvatar,
     ListItemIcon,
     ListItemText, Theme, Toolbar,
-    Tooltip,
     Typography,
-    useMediaQuery, useTheme
 } from "@material-ui/core";
 import {Skeleton} from "@material-ui/lab";
 import {format, formatDistance} from "date-fns";
@@ -25,7 +21,6 @@ import AssignmentIcon from "@material-ui/icons/AssignmentRounded";
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import ReactMarkdown from "react-markdown";
-import WebsiteIcon from '@material-ui/icons/LanguageRounded';
 import {makeStyles} from "@material-ui/core/styles";
 import CompanyIcon from '@material-ui/icons/BusinessRounded';
 
@@ -37,11 +32,11 @@ interface ExperienceItemProps {
 
 const useStyles = makeStyles((theme: Theme) => ({
     listItemRoot: {
+        padding: "20px",
         borderRadius: "25px",
         alignItems: "flex-start",
-        [theme.breakpoints.down('xs')]: {
-            paddingRight: "4px"
-        }
+        paddingRight: "12px",
+        paddingTop: "6px"
     },
     skeletonAvatar: {
         height: "40px",
@@ -53,34 +48,50 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     listItemIcon: {
         minWidth: "30px",
+        marginRight: "8px",
     },
     listItemNested: {
         padding: "0px",
+        paddingLeft: "9px"
     },
     expandButton: {
         alignSelf: "center",
     },
     skillChip: {
         margin:"5px 8px 0px 0px",
+        "&:hover": {
+            backgroundColor: theme.palette.primary.main
+        }
     },
     skeleton40: {
         height: "40px",
     },
     markdown: {
-        padding: 0
+        padding: 0,
+        marginTop: "10px",
+        marginBottom: "10px"
     },
     skills: {
         marginTop:"10px",
     },
+    toolbar: {
+        padding: 0
+    },
+    title: {
+        fontWeight: 700
+    },
+    companyAvatar: {
+        marginRight: "16px"
+    },
+    titleDiv: {
+        marginBottom: "12px"
+    }
 }));
 
 const ExperienceItem = (props: ExperienceItemProps) => {
     const {t, i18n} = useTranslation("me");
     const {experience, ready} = props;
     const classes = useStyles();
-
-    const theme = useTheme();
-    const xsDown = useMediaQuery(theme.breakpoints.down('xs'));
 
     const [open, setOpen] = React.useState(false);
 
@@ -102,57 +113,27 @@ const ExperienceItem = (props: ExperienceItemProps) => {
 
     return <>
         <ListItem className={classes.listItemRoot} button onClick={handleClick}>
-            {
-                xsDown
-                    ? <></>
-                    : <ListItemAvatar>
-                        {
-                            ready
-                                ? <Avatar variant={"rounded"} alt={experience.company} src={experience.logo}/>
-                                : <Skeleton variant={"circle"} className={classes.skeletonAvatar}/>
-                        }
-                    </ListItemAvatar>
-            }
             <ListItemText
                 primary={
                     ready
                         ? <>
-                        {
-                            xsDown
-                                ? <>
-                                    <Toolbar style={{padding: "0px"}}>
-                                        <Avatar style={{marginRight: "16px"}} variant={"rounded"} alt={experience.company} src={experience.logo}/>
-                                        <Typography variant={"h6"} display={"inline"}>{experience.title}</Typography>
-                                    </Toolbar>
-                                </> : <>
-                                    <Typography variant={"h6"} display={"inline"}>{experience.title}</Typography>
-                                    <Typography display={"inline"}>{` - ${experience.company}`}</Typography>
-                                    {
-                                        experience.website
-                                            ? <Tooltip title={experience.website}>
-                                                <IconButton component={"a"} href={experience.website} className={classes.websiteButton}>
-                                                    <WebsiteIcon fontSize={"small"}/>
-                                                </IconButton>
-                                            </Tooltip> : <></>
-                                    }
-                                </>
-                        }
-                        </>
-                        : <Skeleton className={classes.skeleton40}/>
+                            <Toolbar className={classes.toolbar}>
+                                <Avatar className={classes.companyAvatar} variant={"rounded"} alt={experience.company} src={experience.logo}/>
+                                <Typography className={classes.title} variant={"h6"} display={"inline"}>{experience.title}</Typography>
+                            </Toolbar>
+                        </> : <Skeleton className={classes.skeleton40}/>
                 }
                 secondaryTypographyProps={{component: "span"}}
                 secondary={<>
                     <List disablePadding>
-                        {
-                            xsDown ? <ListItem className={classes.listItemNested}>
-                                <ListItemIcon className={classes.listItemIcon}><CompanyIcon fontSize={"small"}/></ListItemIcon>
-                                <ListItemText>{
-                                    ready
-                                        ? experience.company
-                                        : <Skeleton/>
-                                }</ListItemText>
-                            </ListItem> : <></>
-                        }
+                        <ListItem className={classes.listItemNested}>
+                            <ListItemIcon className={classes.listItemIcon}><CompanyIcon fontSize={"small"}/></ListItemIcon>
+                            <ListItemText>{
+                                ready
+                                    ? experience.company
+                                    : <Skeleton/>
+                            }</ListItemText>
+                        </ListItem>
                         <ListItem className={classes.listItemNested}>
                             <ListItemIcon className={classes.listItemIcon}><DateIcon fontSize={"small"}/></ListItemIcon>
                             <ListItemText>{
@@ -194,7 +175,7 @@ const ExperienceItem = (props: ExperienceItemProps) => {
                     {
                         ready
                             ? <div className={classes.skills}>
-                                {experience.skills.map(s => <Chip key={s} className={classes.skillChip} label={s}/>)}
+                                {experience.skills.map(s => <Chip onClick={() => {}} key={s} className={classes.skillChip} label={s}/>)}
                             </div>
                             : <Skeleton className={classes.skeleton40}/>
                     }

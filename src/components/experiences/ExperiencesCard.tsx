@@ -1,4 +1,4 @@
-import {Card, CardContent, Grid, Grow, Theme, useMediaQuery, useTheme} from "@material-ui/core";
+import {Card, Grid, Grow, Theme, Typography, useMediaQuery, useTheme} from "@material-ui/core";
 import * as React from "react";
 import {useTranslation} from "react-i18next";
 import {Experience} from "../../models";
@@ -23,9 +23,14 @@ const useStyles = makeStyles((theme: Theme) => ({
         }
     },
     cardContent: {
+        padding: "0px",
         [theme.breakpoints.down('xs')]: {
             padding: "14px"
         }
+    },
+    experiences: {
+        fontWeight: 700,
+        margin: "30px"
     }
 }));
 
@@ -35,12 +40,14 @@ interface Image {
     name: string;
 }
 
-const ExperiencesCard = () => {
+const ExperiencesCard = (props: {style?: React.CSSProperties}) => {
     const {t, ready} = useTranslation("me");
     const theme = useTheme();
     const xsDown = useMediaQuery(theme.breakpoints.down('xs'));
+    const smDown = useMediaQuery(theme.breakpoints.down('sm'));
 
     const classes = useStyles();
+    const {style} = props;
 
     const { allFile } = useStaticQuery(graphql`
         query {
@@ -53,12 +60,12 @@ const ExperiencesCard = () => {
             }
           }
         }
-    `)
+    `);
 
     const images: Image[] = allFile.edges.map((e: {node: {publicURL: string, relativePath: string}}) => ({url: e.node.publicURL, name: e.node.relativePath}));
     const getImage = (name: string): string => {
         return images.find(i => i.name === name)?.url ?? "";
-    }
+    };
 
     const experiences: Experience[] = [
         {
@@ -114,35 +121,80 @@ const ExperiencesCard = () => {
         }
     ];
 
-    return <Grow in={ready}>
-        <Grid container spacing={xsDown ? 2 : 6}>
-            <Grid item xs={12} md={6}>
-                <Grid container spacing={xsDown ? 2 : 6}>
-                    {
-                        experiences.filter((_, i) => (i + 1) % 2).map((e, i) => <Grid xs={12} item key={`${i}`}>
-                            <Card elevation={6}>
-                                <CardContent className={classes.cardContent}>
-                                    <ExperienceItem experience={e} ready={ready}/>
-                                </CardContent>
-                            </Card>
-                        </Grid>)
-                    }
-                </Grid>
-            </Grid>
-            <Grid item xs={12} md={6}>
-                <Grid container spacing={xsDown ? 2 : 6}>
-                    {
-                        experiences.filter((_, i) => i % 2).map((e, i) => <Grid xs={12} item key={`${i}`}>
-                            <Card elevation={6}>
-                                <CardContent className={classes.cardContent}>
-                                    <ExperienceItem experience={e} ready={ready}/>
-                                </CardContent>
-                            </Card>
-                        </Grid>)
-                    }
-                </Grid>
-            </Grid>
-        </Grid>
+    const firstColumn = experiences.filter((_, i) => (i + 1) % 2);
+    const secondColumn = experiences.filter((_, i) => i % 2);
+
+    return <Grow in>
+        <div style={style}>
+            <Typography variant={xsDown ? "h4" : "h3"} className={classes.experiences}>{t("experiences")}</Typography>
+            {
+                xsDown ? <>
+                    <Grid container spacing={2}>
+                        <Grid item xs={12}>
+                            <Grid container spacing={2}>
+                                {
+                                    experiences.map((e, i) => <Grid xs={12} item key={`${i}`}>
+                                        <Grow in timeout={i * 500}>
+                                            <Card elevation={6}>
+                                                <ExperienceItem className={classes.cardContent} experience={e} ready={ready}/>
+                                            </Card>
+                                        </Grow>
+                                    </Grid>)
+                                }
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                    </> : <>
+                    <Grid container spacing={6}>
+                        {
+                            smDown ? <>
+                                <Grid item xs={12}>
+                                    <Grid container spacing={6}>
+                                        {
+                                            experiences.map((e, i) => <Grid xs={12} item key={`${i}`}>
+                                                <Grow in timeout={500}>
+                                                    <Card elevation={6}>
+                                                        <ExperienceItem className={classes.cardContent} experience={e} ready={ready}/>
+                                                    </Card>
+                                                </Grow>
+                                            </Grid>)
+                                        }
+                                    </Grid>
+                                </Grid>
+                            </> : <>
+                                <Grid item md={6}>
+                                    <Grid container spacing={6}>
+                                        {
+                                            firstColumn.map((e, i) => <Grid xs={12} item key={`${i}`}>
+                                                <Grow in timeout={500}>
+                                                    <Card elevation={6}>
+                                                        <ExperienceItem className={classes.cardContent} experience={e} ready={ready}/>
+                                                    </Card>
+                                                </Grow>
+                                            </Grid>)
+                                        }
+                                    </Grid>
+                                </Grid>
+                                <Grid item md={6}>
+                                    <Grid container spacing={6}>
+                                        {
+                                            secondColumn.map((e, i) => <Grid xs={12} item key={`${i}`}>
+                                                <Grow in timeout={500}>
+                                                    <Card elevation={6}>
+                                                        <ExperienceItem className={classes.cardContent} experience={e} ready={ready}/>
+                                                    </Card>
+                                                </Grow>
+                                            </Grid>)
+                                        }
+                                    </Grid>
+                                </Grid>
+                            </>
+                        }
+                    </Grid>
+                    </>
+            }
+
+        </div>
     </Grow>
 };
 

@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { graphql } from 'gatsby'
 import ElevationCard from "../components/ElevationCard";
-import {CardActions, CardContent, Chip, Divider, Typography} from "@material-ui/core";
+import {CardActions, CardContent, Chip, Divider, Grow, Typography} from "@material-ui/core";
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import {Helmet} from "react-helmet";
 import {makeStyles} from "@material-ui/core/styles";
@@ -72,24 +72,26 @@ const PostTemplate: React.FC<PostTemplateProps> = ({ data }) => {
                 <meta property="og:image" content={data.mdx.fields.thumb}/>
                 <meta name="keywords" content={data.mdx.fields.tags?.join(",")}/>
             </Helmet>
-            <div className={classes.container}>
-                <ElevationCard>
-                    <CardContent>
-                        <h1>{data.mdx.fields.title}</h1>
-                        <Typography>{formatDate(data.mdx.fields.date)} • {data.mdx.timeToRead} min read</Typography>
-                        <Divider className={classes.divider}/>
-                        <MDXRenderer>{data.mdx.body}</MDXRenderer>
-                    </CardContent>
-                    <CardActions>
-                        {
-                            data.mdx.fields.tags?.map(t => <Chip key={t} className={classes.tag} label={t}/>)
-                        }
-                    </CardActions>
-                </ElevationCard>
-            </div>
+            <Grow in timeout={500}>
+                <div className={classes.container}>
+                    <ElevationCard>
+                        <CardContent>
+                            <h1>{data.mdx.fields.title}</h1>
+                            <Typography>{formatDate(data.mdx.fields.date)} • {data.mdx.timeToRead} min read</Typography>
+                            <Divider className={classes.divider}/>
+                            <MDXRenderer>{data.mdx.body}</MDXRenderer>
+                        </CardContent>
+                        <CardActions>
+                            {
+                                data.mdx.fields.tags?.map(t => <Chip key={t} className={classes.tag} label={t}/>)
+                            }
+                        </CardActions>
+                    </ElevationCard>
+                </div>
+            </Grow>
         </>
     );
-}
+};
 
 export default PostTemplate;
 
