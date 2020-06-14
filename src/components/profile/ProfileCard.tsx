@@ -48,6 +48,11 @@ const useStyles = makeStyles((theme: Theme) => ({
         }
     },
     iconButton: {
+        "&:hover": {
+            color: theme.palette.primary.main,
+            backgroundColor: "transparent",
+            transition:"color 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms"
+        },
         [theme.breakpoints.down('xs')]: {
             padding: "5px"
         },
