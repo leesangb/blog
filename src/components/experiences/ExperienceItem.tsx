@@ -35,7 +35,6 @@ const useStyles = makeStyles((theme: Theme) => ({
         padding: "20px",
         borderRadius: "25px",
         alignItems: "flex-start",
-        paddingRight: "12px",
         paddingTop: "6px"
     },
     skeletonAvatar: {
@@ -85,10 +84,13 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     titleDiv: {
         marginBottom: "12px"
-    }
+    },
+    separatorDiv: {
+        flexGrow: 1,
+    },
 }));
 
-const ExperienceItem = (props: ExperienceItemProps) => {
+const ExperienceItem = (props: ExperienceItemProps & {className?: string}) => {
     const {t, i18n} = useTranslation("me");
     const {experience, ready} = props;
     const classes = useStyles();
@@ -112,20 +114,26 @@ const ExperienceItem = (props: ExperienceItemProps) => {
     };
 
     return <>
-        <ListItem className={classes.listItemRoot} button onClick={handleClick}>
+        <ListItem className={classes.listItemRoot} button>
             <ListItemText
                 primary={
                     ready
                         ? <>
-                            <Toolbar className={classes.toolbar}>
+                            <Toolbar className={classes.toolbar} onClick={handleClick}>
                                 <Avatar className={classes.companyAvatar} variant={"rounded"} alt={experience.company} src={experience.logo}/>
                                 <Typography className={classes.title} variant={"h6"} display={"inline"}>{experience.title}</Typography>
+                                <div className={classes.separatorDiv}/>
+                                {
+                                    hasFullDescription && ready
+                                        ? (open ? <ExpandLess className={classes.expandButton}/> : <ExpandMore className={classes.expandButton}/>)
+                                        : <></>
+                                }
                             </Toolbar>
                         </> : <Skeleton className={classes.skeleton40}/>
                 }
                 secondaryTypographyProps={{component: "span"}}
                 secondary={<>
-                    <List disablePadding>
+                    <List disablePadding onClick={handleClick}>
                         <ListItem className={classes.listItemNested}>
                             <ListItemIcon className={classes.listItemIcon}><CompanyIcon fontSize={"small"}/></ListItemIcon>
                             <ListItemText>{
@@ -181,11 +189,6 @@ const ExperienceItem = (props: ExperienceItemProps) => {
                     }
                 </>}
             />
-            {
-                hasFullDescription && ready
-                    ? (open ? <ExpandLess className={classes.expandButton}/> : <ExpandMore className={classes.expandButton}/>)
-                    : <></>
-            }
         </ListItem>
     </>
 };

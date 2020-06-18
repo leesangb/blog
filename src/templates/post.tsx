@@ -65,7 +65,7 @@ const PostTemplate: React.FC<PostTemplateProps> = ({ data }) => {
     return (
         <>
             <Helmet htmlAttributes={{"lang": formatLangForHtml(data.mdx.fields.lang)}}>
-                <title>{data.mdx.fields.title}</title>
+                <title>{data.site.siteMetadata.title} - {data.mdx.fields.title}</title>
                 <meta name="description" content={data.mdx.excerpt}/>
                 <meta property="og:title" content={data.mdx.fields.title}/>
                 <meta property="og:description" content={data.mdx.excerpt}/>

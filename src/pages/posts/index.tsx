@@ -5,6 +5,7 @@ import {Post} from "../../models";
 import {useTranslation} from "react-i18next";
 import {graphql, Link, useStaticQuery} from "gatsby";
 import {makeStyles} from "@material-ui/core/styles";
+import {Helmet} from "react-helmet";
 
 const useStyles = makeStyles(() => ({
     postItem: {
@@ -15,7 +16,7 @@ const useStyles = makeStyles(() => ({
 const Posts = (props: {style?: React.CSSProperties}) => {
     const { i18n } = useTranslation();
 
-    const { allMdx } = useStaticQuery(graphql`
+    const { allMdx, site } = useStaticQuery(graphql`
         query GetPosts {
           allMdx(filter: {fields: {layout: {eq: "post"}}}, sort: {order: DESC, fields: fields___date}) {
             nodes {
@@ -29,6 +30,13 @@ const Posts = (props: {style?: React.CSSProperties}) => {
               }
             }
           }
+          site {
+            siteMetadata {
+              title
+              description
+              siteUrl
+            }
+          }
         }
     `);
 
@@ -40,8 +48,17 @@ const Posts = (props: {style?: React.CSSProperties}) => {
 
     const posts = i18n.language === "kr" ? kr : i18n.language === "fr" ? fr : en;
     const classes = useStyles();
+    const {t, ready} = useTranslation("translation");
 
     return <>
+        {
+            ready ? <Helmet>
+                <title>{site.siteMetadata.title} - {t("posts")}</title>
+                <meta name="description" content={t("profile.description")}/>
+                <meta property="og:title" content={t("about me")}/>
+                <meta property="og:description" content={t("profile.description")}/>
+            </Helmet> : <></>
+        }
         <Grid container spacing={2}>
             {
                 posts.map((p: Post, i: number) => <Grid component={Link} to={p.slug}

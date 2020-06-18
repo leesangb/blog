@@ -1,7 +1,7 @@
 import {Card, Grid, Grow, Theme, Typography, useMediaQuery, useTheme} from "@material-ui/core";
 import * as React from "react";
 import {useTranslation} from "react-i18next";
-import {Experience} from "../../models";
+import {Experience, Image} from "../../models";
 import ExperienceItem from "./ExperienceItem";
 import {makeStyles} from "@material-ui/core/styles";
 import {graphql, useStaticQuery} from "gatsby";
@@ -34,11 +34,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     }
 }));
 
-
-interface Image {
-    url: string;
-    name: string;
-}
 
 const ExperiencesCard = (props: {style?: React.CSSProperties}) => {
     const {t, ready} = useTranslation("me");

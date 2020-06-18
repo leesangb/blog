@@ -31,5 +31,14 @@
         "firstname": "상빈",
         "lastname": "이",
         "description": "다루기 쉬운 프로그램과 심플한 디자인을 연구하는 개발자입니다"
+    },
+    "education": "학력",
+    "educations": {
+        "epita": {
+            "description": "컴퓨터 공학 석사"
+        },
+        "uqac": {
+            "description": "컴퓨터 공학 (교환 학생)"
+        }
     }
 }
