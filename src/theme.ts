@@ -11,7 +11,7 @@ const loadPalette = (type: "dark" | "light") => {
         type,
         primary: {main: blue},
         secondary: {main: blue},
-    }
+    };
 
     if (type === "dark")
         return {
@@ -22,8 +22,8 @@ const loadPalette = (type: "dark" | "light") => {
                 disabled: "rgba(255,255,255,0.5)",
             },
             background: {
-                default: "#1a1a1a",
-                paper: "#2a2a2a"
+                default: "#252525",
+                paper: "#252525"
             },
             action: {
                 active: "#fff",
@@ -42,8 +42,8 @@ const loadPalette = (type: "dark" | "light") => {
             disabled: "rgba(0,0,0,0.38)",
         },
         background: {
-            default: "#ffffff",
-            paper: "#fafafa"
+            default: "#f2f1f5",
+            paper: "#f2f1f5"
         },
         action: {
             active: "rgba(0,0,0,0.54)",

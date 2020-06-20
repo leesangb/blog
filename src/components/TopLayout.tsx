@@ -13,7 +13,7 @@ import {Link} from "@material-ui/core";
 import "prism-themes/themes/prism-material-dark.css";
 import TopLayoutContext from "./contexts/TopLayoutContext";
 
-const shortcodes = { Link }
+const shortcodes = { Link };
 
 const TopLayout = (props: {children: React.ReactNode}) => {
     const {theme, toggleDarkMode} = useDarkMode();

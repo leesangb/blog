@@ -5,6 +5,7 @@ import {CardActions, CardContent, Chip, Divider, Grow, Typography} from "@materi
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import {Helmet} from "react-helmet";
 import {makeStyles} from "@material-ui/core/styles";
+import NeomorphismCard from "../components/NeomorphismCard";
 import {formatLangForHtml} from "../tools/helpers";
 import {useTranslation} from "react-i18next";
 import {useCallback} from "react";
@@ -65,7 +66,7 @@ const PostTemplate: React.FC<PostTemplateProps> = ({ data }) => {
     return (
         <>
             <Helmet htmlAttributes={{"lang": formatLangForHtml(data.mdx.fields.lang)}}>
-                <title>{data.mdx.fields.title}</title>
+                <title>{data.site.siteMetadata.title} - {data.mdx.fields.title}</title>
                 <meta name="description" content={data.mdx.excerpt}/>
                 <meta property="og:title" content={data.mdx.fields.title}/>
                 <meta property="og:description" content={data.mdx.excerpt}/>
@@ -74,7 +75,7 @@ const PostTemplate: React.FC<PostTemplateProps> = ({ data }) => {
             </Helmet>
             <Grow in timeout={500}>
                 <div className={classes.container}>
-                    <ElevationCard>
+                    <NeomorphismCard>
                         <CardContent>
                             <h1>{data.mdx.fields.title}</h1>
                             <Typography>{formatDate(data.mdx.fields.date)} • {data.mdx.timeToRead} min read</Typography>
@@ -86,7 +87,7 @@ const PostTemplate: React.FC<PostTemplateProps> = ({ data }) => {
                                 data.mdx.fields.tags?.map(t => <Chip key={t} className={classes.tag} label={t}/>)
                             }
                         </CardActions>
-                    </ElevationCard>
+                    </NeomorphismCard>
                 </div>
             </Grow>
         </>
