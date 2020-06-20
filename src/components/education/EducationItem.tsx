@@ -1,10 +1,5 @@
 import {
-    Avatar,
-    List,
-    ListItem,
-    ListItemIcon,
-    ListItemText, Toolbar,
-    Typography,
+    Avatar, List, ListItem, ListItemIcon, ListItemText, Toolbar, Typography, useMediaQuery, useTheme,
 } from "@material-ui/core";
 import {Skeleton} from "@material-ui/lab";
 import {format} from "date-fns";
@@ -64,7 +59,7 @@ const useStyles = makeStyles(() => ({
         marginBottom: "12px"
     },
     description: {
-        marginTop: "-12px",
+        marginTop: "0px",
         paddingLeft: "46px",
         paddingBottom: "12px"
     }
@@ -74,6 +69,8 @@ const EducationItem = (props: EducationItemProps & {className?: string}) => {
     const {t, i18n} = useTranslation("me");
     const {education, ready} = props;
     const classes = useStyles();
+    const theme = useTheme();
+    const xsDown = useMediaQuery(theme.breakpoints.down('xs'));
 
     const formatDate = useCallback((education: Education): string => {
         const locale = i18n.language === "en" ? enUS : i18n.language === "fr" ? fr : ko;
@@ -92,7 +89,7 @@ const EducationItem = (props: EducationItemProps & {className?: string}) => {
                         ? <>
                             <Toolbar className={classes.toolbar}>
                                 <Avatar className={classes.schoolAvatar} variant={"rounded"} alt={education.name} src={education.logo}/>
-                                <Typography className={classes.title} variant={"h5"} display={"inline"}>{education.name}</Typography>
+                                <Typography className={classes.title} variant={"h6"} display={"inline"}>{education.name}</Typography>
                             </Toolbar>
                         </> : <Skeleton className={classes.skeleton40}/>
                 }

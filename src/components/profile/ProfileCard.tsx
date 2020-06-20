@@ -21,6 +21,7 @@ import GitHubIcon from "@material-ui/icons/GitHub";
 import EmailIcon from "@material-ui/icons/EmailRounded";
 import {Profile as ProfileModel} from "../../models";
 import {graphql, useStaticQuery} from "gatsby";
+import NeomorphismCard from "../NeomorphismCard";
 
 const useStyles = makeStyles((theme: Theme) => ({
     avatar: {
@@ -163,7 +164,7 @@ const ProfileCard = (props: {style?: React.CSSProperties}) => {
                     ? <Typography className={classes.aboutMe} variant={xsDown ? "h4" : "h3"}>{t("about me")}</Typography>
                     : <Skeleton className={classes.skeletonAboutMe}/>
             }
-            <Card elevation={6}>
+            <NeomorphismCard>
                 <CardContent className={classes.cardContent}>
                     {
                         ready
@@ -184,7 +185,7 @@ const ProfileCard = (props: {style?: React.CSSProperties}) => {
                             </>
                     }
                 </CardContent>
-            </Card>
+            </NeomorphismCard>
         </div>
     </Grow>
 };

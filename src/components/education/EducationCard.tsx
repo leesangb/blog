@@ -1,8 +1,9 @@
 import * as React from "react";
 import {useTranslation} from "react-i18next";
-import {Card, Grid, Grow, Theme, Typography, useMediaQuery, useTheme} from "@material-ui/core";
+import {Grid, Grow, Theme, Typography, useMediaQuery, useTheme} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import {Education, Image} from "../../models";
+import NeomorphismCard from "../NeomorphismCard";
 import EducationItem from "./EducationItem";
 import {graphql, useStaticQuery} from "gatsby";
 
@@ -24,7 +25,6 @@ const EducationCard = (props: {style?: React.CSSProperties}) => {
     const {t, ready} = useTranslation("me");
     const theme = useTheme();
     const xsDown = useMediaQuery(theme.breakpoints.down('xs'));
-    const smDown = useMediaQuery(theme.breakpoints.down('sm'));
 
     const { allFile } = useStaticQuery(graphql`
         query {
@@ -72,9 +72,9 @@ const EducationCard = (props: {style?: React.CSSProperties}) => {
                 {
                     educations.map((e, i) => <Grid item xs={12} key={i}>
                         <Grow in timeout={500}>
-                            <Card elevation={6}>
+                            <NeomorphismCard>
                                 <EducationItem className={classes.cardContent} education={e} ready={ready}/>
-                            </Card>
+                            </NeomorphismCard>
                         </Grow>
                     </Grid>)
                 }

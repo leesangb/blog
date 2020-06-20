@@ -114,7 +114,7 @@ const ExperienceItem = (props: ExperienceItemProps & {className?: string}) => {
     };
 
     return <>
-        <ListItem className={classes.listItemRoot} button>
+        <ListItem className={classes.listItemRoot}>
             <ListItemText
                 primary={
                     ready

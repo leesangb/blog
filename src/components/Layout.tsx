@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     container: {
         margin: "60px",
         [theme.breakpoints.down('xs')]: {
-            margin: "12px",
+            margin: "24px",
         },
     }
 }));
@@ -69,7 +69,7 @@ const Layout = (props: {children: React.ReactNode}) => {
             {props.children}
         </div>
     </>
-}
+};
 
 
 

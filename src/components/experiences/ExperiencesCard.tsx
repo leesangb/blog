@@ -1,7 +1,8 @@
-import {Card, Grid, Grow, Theme, Typography, useMediaQuery, useTheme} from "@material-ui/core";
+import {Grid, Grow, Theme, Typography, useMediaQuery, useTheme} from "@material-ui/core";
 import * as React from "react";
 import {useTranslation} from "react-i18next";
 import {Experience, Image} from "../../models";
+import NeomorphismCard from "../NeomorphismCard";
 import ExperienceItem from "./ExperienceItem";
 import {makeStyles} from "@material-ui/core/styles";
 import {graphql, useStaticQuery} from "gatsby";
@@ -126,13 +127,13 @@ const ExperiencesCard = (props: {style?: React.CSSProperties}) => {
                 xsDown ? <>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
-                            <Grid container spacing={2}>
+                            <Grid container spacing={4}>
                                 {
                                     experiences.map((e, i) => <Grid xs={12} item key={`${i}`}>
                                         <Grow in timeout={i * 500}>
-                                            <Card elevation={6}>
+                                            <NeomorphismCard>
                                                 <ExperienceItem className={classes.cardContent} experience={e} ready={ready}/>
-                                            </Card>
+                                            </NeomorphismCard>
                                         </Grow>
                                     </Grid>)
                                 }
@@ -148,9 +149,9 @@ const ExperiencesCard = (props: {style?: React.CSSProperties}) => {
                                         {
                                             experiences.map((e, i) => <Grid xs={12} item key={`${i}`}>
                                                 <Grow in timeout={500}>
-                                                    <Card elevation={6}>
+                                                    <NeomorphismCard>
                                                         <ExperienceItem className={classes.cardContent} experience={e} ready={ready}/>
-                                                    </Card>
+                                                    </NeomorphismCard>
                                                 </Grow>
                                             </Grid>)
                                         }
@@ -162,9 +163,9 @@ const ExperiencesCard = (props: {style?: React.CSSProperties}) => {
                                         {
                                             firstColumn.map((e, i) => <Grid xs={12} item key={`${i}`}>
                                                 <Grow in timeout={500}>
-                                                    <Card elevation={6}>
+                                                    <NeomorphismCard>
                                                         <ExperienceItem className={classes.cardContent} experience={e} ready={ready}/>
-                                                    </Card>
+                                                    </NeomorphismCard>
                                                 </Grow>
                                             </Grid>)
                                         }
@@ -175,9 +176,9 @@ const ExperiencesCard = (props: {style?: React.CSSProperties}) => {
                                         {
                                             secondColumn.map((e, i) => <Grid xs={12} item key={`${i}`}>
                                                 <Grow in timeout={500}>
-                                                    <Card elevation={6}>
+                                                    <NeomorphismCard>
                                                         <ExperienceItem className={classes.cardContent} experience={e} ready={ready}/>
-                                                    </Card>
+                                                    </NeomorphismCard>
                                                 </Grow>
                                             </Grid>)
                                         }

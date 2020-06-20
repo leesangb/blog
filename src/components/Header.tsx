@@ -13,7 +13,7 @@ import {
     ListItemIcon,
     ListItemText,
     Popover,
-    SwipeableDrawer,
+    SwipeableDrawer, Theme,
     Toolbar,
     Typography,
     useMediaQuery,
@@ -46,7 +46,7 @@ interface Navigation {
     link: string;
 }
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme: Theme) => ({
     appBar: {
         zIndex: 1400,
     },
@@ -88,6 +88,9 @@ const useStyles = makeStyles(() => ({
         textTransform: "uppercase",
         width: "100px"
     },
+    card: {
+        boxShadow: theme.palette.type === "light" ? "10px 10px 20px #cacaca, -10px -10px 20px #ffffff" : "10px 10px 20px #1f1f1f, -10px -10px 20px #2b2b2b",
+    }
 }));
 
 
@@ -223,9 +226,11 @@ const Header = () => {
                 <Popover open={Boolean(anchorEl)}
                          onClose={closePopover}
                          anchorEl={anchorEl}
+                         PaperProps={{className:classes.card}}
                          style={{zIndex: 1500}}
                          anchorOrigin={{vertical: "bottom", horizontal: "right"}}>
-                    <Card onMouseLeave={handleExpand(false)}>
+                    <Card
+                        className={classes.card} onMouseLeave={handleExpand(false)}>
                         <CardContent>
                             <ListItem className={classes.listItem} button onClick={handleChangeTheme}>
                                 <ListItemIcon className={classes.popOverListItemIcon}>

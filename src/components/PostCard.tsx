@@ -8,6 +8,7 @@ import {enUS, fr, ko} from "date-fns/locale";
 import {format} from "date-fns";
 import {Skeleton} from "@material-ui/lab";
 import {makeStyles} from "@material-ui/core/styles";
+import NeomorphismCard from "./NeomorphismCard";
 
 interface PostCardProps {
     post: Post;
@@ -35,7 +36,7 @@ const PostCard = (props: PostCardProps) => {
         return format(post.date, t("dateFormat"), {locale});
     }, [i18n.language, t, post.date]);
 
-    return <ElevationCard>
+    return <NeomorphismCard>
             <CardActionArea>
                 <CardMedia className={classes.cardMedia} image={post.thumb}/>
                 <CardContent>
@@ -55,7 +56,7 @@ const PostCard = (props: PostCardProps) => {
                     }
                 </CardContent>
             </CardActionArea>
-        </ElevationCard>
+        </NeomorphismCard>
 };
 
 export default PostCard;

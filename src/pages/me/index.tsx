@@ -9,7 +9,7 @@ import {graphql, useStaticQuery} from "gatsby";
 
 const useStyles = makeStyles((theme: Theme) => ({
     divider: {
-        margin: "40px",
+        margin: "60px",
         [theme.breakpoints.down('xs')]: {
             margin: "20px",
         },
