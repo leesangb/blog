@@ -1,5 +1,5 @@
 import {
-    Avatar, Card,
+    Avatar,
     CardContent,
     Grow,
     Hidden,
@@ -157,7 +157,7 @@ const ProfileCard = (props: {style?: React.CSSProperties}) => {
         </Tooltip>
     </>;
 
-    return <Grow in timeout={500}>
+    return <Grow in={ready} timeout={500}>
         <div style={props.style}>
             {
                 ready

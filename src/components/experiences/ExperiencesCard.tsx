@@ -120,7 +120,7 @@ const ExperiencesCard = (props: {style?: React.CSSProperties}) => {
     const firstColumn = experiences.filter((_, i) => (i + 1) % 2);
     const secondColumn = experiences.filter((_, i) => i % 2);
 
-    return <Grow in>
+    return <Grow in={ready}>
         <div style={style}>
             <Typography variant={xsDown ? "h4" : "h3"} className={classes.experiences}>{t("experiences")}</Typography>
             {
@@ -130,7 +130,7 @@ const ExperiencesCard = (props: {style?: React.CSSProperties}) => {
                             <Grid container spacing={4}>
                                 {
                                     experiences.map((e, i) => <Grid xs={12} item key={`${i}`}>
-                                        <Grow in timeout={i * 500}>
+                                        <Grow in={ready} timeout={i * 500}>
                                             <NeomorphismCard>
                                                 <ExperienceItem className={classes.cardContent} experience={e} ready={ready}/>
                                             </NeomorphismCard>
@@ -148,7 +148,7 @@ const ExperiencesCard = (props: {style?: React.CSSProperties}) => {
                                     <Grid container spacing={6}>
                                         {
                                             experiences.map((e, i) => <Grid xs={12} item key={`${i}`}>
-                                                <Grow in timeout={500}>
+                                                <Grow in={ready} timeout={500}>
                                                     <NeomorphismCard>
                                                         <ExperienceItem className={classes.cardContent} experience={e} ready={ready}/>
                                                     </NeomorphismCard>
@@ -162,7 +162,7 @@ const ExperiencesCard = (props: {style?: React.CSSProperties}) => {
                                     <Grid container spacing={6}>
                                         {
                                             firstColumn.map((e, i) => <Grid xs={12} item key={`${i}`}>
-                                                <Grow in timeout={500}>
+                                                <Grow in={ready} timeout={500}>
                                                     <NeomorphismCard>
                                                         <ExperienceItem className={classes.cardContent} experience={e} ready={ready}/>
                                                     </NeomorphismCard>
@@ -175,7 +175,7 @@ const ExperiencesCard = (props: {style?: React.CSSProperties}) => {
                                     <Grid container spacing={6}>
                                         {
                                             secondColumn.map((e, i) => <Grid xs={12} item key={`${i}`}>
-                                                <Grow in timeout={500}>
+                                                <Grow in={ready} timeout={500}>
                                                     <NeomorphismCard>
                                                         <ExperienceItem className={classes.cardContent} experience={e} ready={ready}/>
                                                     </NeomorphismCard>
