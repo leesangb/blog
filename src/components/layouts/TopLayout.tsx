@@ -1,17 +1,17 @@
 import * as React from 'react';
 import {useEffect} from 'react';
-import i18next from "../locales/i18next";
+import i18next from "../../locales/i18next";
 import {Helmet} from 'react-helmet';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import {createMuiTheme, Theme, ThemeProvider} from '@material-ui/core/styles';
-import {useDarkMode} from "../theme";
+import {useDarkMode} from "../../theme";
 import {enUS} from "@material-ui/core/locale";
 import {I18nextProvider} from "react-i18next";
 // @ts-ignore
 import {MDXProvider} from "@mdx-js/react"
 import {Link} from "@material-ui/core";
 import "prism-themes/themes/prism-material-dark.css";
-import TopLayoutContext from "./contexts/TopLayoutContext";
+import TopLayoutContext from "../contexts/TopLayoutContext";
 
 const shortcodes = { Link };
 

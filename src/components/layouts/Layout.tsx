@@ -3,12 +3,12 @@ import {useTranslation} from "react-i18next";
 import {useContext, useEffect} from "react";
 import {enUS, frFR, koKR} from "@material-ui/core/locale";
 import {graphql, navigate, useStaticQuery} from "gatsby";
-import {loadLocale, saveLocale} from "../tools/localStorage";
-import TopLayoutContext from "./contexts/TopLayoutContext";
+import {loadLocale, saveLocale} from "../../tools/localStorage";
+import TopLayoutContext from "../contexts/TopLayoutContext";
 import Header from "./Header";
 import {makeStyles, Theme} from "@material-ui/core/styles";
 import {Helmet} from "react-helmet";
-import {formatLangForHtml} from "../tools/helpers";
+import {formatLangForHtml} from "../../tools/helpers";
 import {useLocation} from "@reach/router";
 
 

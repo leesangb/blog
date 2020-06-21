@@ -1,5 +1,4 @@
 import * as React from "react";
-import ElevationCard from "./ElevationCard";
 import {CardActionArea, CardContent, CardMedia, Chip, Typography} from "@material-ui/core";
 import {Post} from "../models";
 import {useTranslation} from "react-i18next";

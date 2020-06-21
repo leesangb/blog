@@ -22,8 +22,8 @@ import {
 import {ReactNode, useCallback, useContext} from "react";
 import * as React from "react";
 import {useTranslation} from "react-i18next";
-import {iOS} from "../tools/deviceHelper"
-import {loadThemeType} from "../tools/localStorage";
+import {iOS} from "../../tools/deviceHelper"
+import {loadThemeType} from "../../tools/localStorage";
 import DarkModeIcon from "@material-ui/icons/Brightness4Rounded";
 import LightModeIcon from "@material-ui/icons/Brightness7Rounded";
 import Emoji from "@material-ui/icons/EmojiEmotionsRounded";
@@ -37,7 +37,7 @@ import Home from "@material-ui/icons/HomeRounded";
 import PostsIcon from '@material-ui/icons/ChromeReaderModeRounded';
 import {Link} from "gatsby";
 import {makeStyles} from "@material-ui/core/styles";
-import TopLayoutContext from "./contexts/TopLayoutContext";
+import TopLayoutContext from "../contexts/TopLayoutContext";
 
 
 interface Navigation {
