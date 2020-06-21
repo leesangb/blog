@@ -65,13 +65,13 @@ const EducationCard = (props: {style?: React.CSSProperties}) => {
 
     const classes = useStyles();
 
-    return <Grow in>
+    return <Grow in={ready}>
         <div style={props.style}>
             <Typography variant={xsDown ? "h4" : "h3"} className={classes.education}>{t("education")}</Typography>
             <Grid container spacing={xsDown ? 2 : 6}>
                 {
                     educations.map((e, i) => <Grid item xs={12} key={i}>
-                        <Grow in timeout={500}>
+                        <Grow in={ready} timeout={500}>
                             <NeomorphismCard>
                                 <EducationItem className={classes.cardContent} education={e} ready={ready}/>
                             </NeomorphismCard>

@@ -28,5 +28,14 @@
         "firstname": "Sangbin",
         "lastname": "Lee",
         "description": "J'aime développer des programmes intuitifs, facile à utiliser avec un design travaillé"
+    },
+    "education": "Formation",
+    "educations": {
+        "epita": {
+            "description": "Diplôme d'ingénieur, Informatique"
+        },
+        "uqac": {
+            "description": "Informatique"
+        }
     }
 }

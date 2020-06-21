@@ -28,5 +28,14 @@
         "firstname": "Sangbin",
         "lastname": "Lee",
         "description": "I enjoy developing software that is intuitive, easy to use and well designed"
+    },
+    "education": "Education",
+    "educations": {
+        "epita": {
+            "description": "Engineer's degree"
+        },
+        "uqac": {
+            "description": "Computer engineering"
+        }
     }
 }

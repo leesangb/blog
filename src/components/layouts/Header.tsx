@@ -22,11 +22,10 @@ import {
 import {ReactNode, useCallback, useContext} from "react";
 import * as React from "react";
 import {useTranslation} from "react-i18next";
-import {iOS} from "../tools/deviceHelper"
-import {loadThemeType} from "../tools/localStorage";
+import {iOS} from "../../tools/deviceHelper"
+import {loadThemeType} from "../../tools/localStorage";
 import DarkModeIcon from "@material-ui/icons/Brightness4Rounded";
 import LightModeIcon from "@material-ui/icons/Brightness7Rounded";
-import Home from "@material-ui/icons/HomeRounded";
 import Emoji from "@material-ui/icons/EmojiEmotionsRounded";
 import SettingsIcon from '@material-ui/icons/SettingsRounded';
 import ExpandLess from '@material-ui/icons/ExpandLess';
@@ -34,10 +33,11 @@ import ExpandMore from '@material-ui/icons/ExpandMore';
 import TranslateIcon from '@material-ui/icons/TranslateRounded';
 import MenuIcon from '@material-ui/icons/MenuRounded';
 import CloseIcon from '@material-ui/icons/CloseRounded';
+import Home from "@material-ui/icons/HomeRounded";
 import PostsIcon from '@material-ui/icons/ChromeReaderModeRounded';
 import {Link} from "gatsby";
 import {makeStyles} from "@material-ui/core/styles";
-import TopLayoutContext from "./contexts/TopLayoutContext";
+import TopLayoutContext from "../contexts/TopLayoutContext";
 
 
 interface Navigation {
@@ -111,16 +111,16 @@ const Header = () => {
     };
 
     const getNavigations = useCallback((): Navigation[] => [
-        {
-            key: "home",
-            icon: (style?: React.CSSProperties, className?: string) => <Home style={style} className={className}/>,
-            link: `/${i18n.language}`
-        },
-        {
-            key: "posts",
-            icon: (style?: React.CSSProperties, className?: string) => <PostsIcon style={style} className={className}/>,
-            link: `/${i18n.language}/posts`
-        },
+        // {
+        //     key: "home",
+        //     icon: (style?: React.CSSProperties, className?: string) => <Home style={style} className={className}/>,
+        //     link: `/${i18n.language}`
+        // },
+        // {
+        //     key: "posts",
+        //     icon: (style?: React.CSSProperties, className?: string) => <PostsIcon style={style} className={className}/>,
+        //     link: `/${i18n.language}/posts`
+        // },
         {
             key: "about me",
             icon: (style?: React.CSSProperties, className?: string) => <Emoji style={style} className={className}/>,
